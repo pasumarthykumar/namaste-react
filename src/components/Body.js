@@ -23,17 +23,21 @@ const Body =()=>{
         <Shimmer />
       ) : (
         <div className='body'>
-            <input placeholder="Search" value={searchText} onChange={(e)=>{
-                setSearchText(e.target.value);
-            }}></input>
-            <button className="filter-btn" onClick={()=>{
+            <div className="filter flex">
+                <div className="search m-4 p-4">
+                    <input type="text" className="border border-solid border-black" placeholder="Search" value={searchText} onChange={(e)=>{
+                        setSearchText(e.target.value);
+                        }}></input>
+            <button className="px-4 py-2 bg-green-100 m-4 rounded-lg" onClick={()=>{
                 const filteredList=restaurantList.filter((restaurant)=>{
                 return restaurant.info.name.includes(searchText);
 
             });
             setFilteredList(filteredList);
             }}>Search</button>
-            <div className='res-container'>
+                </div>
+            </div>
+            <div className="flex flex-wrap">
             {
                 filteredList.map((restaurant)=>{
                     return <Link key={restaurant.info.id} to={"/restaurant/"+restaurant.info.id}> <RestaurantCard  resData={restaurant}/> </Link>
